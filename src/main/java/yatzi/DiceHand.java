@@ -2,6 +2,7 @@ package yatzi;
 
 import java.util.Iterator;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class DiceHand implements Iterable<Integer> {
 
@@ -13,6 +14,10 @@ public class DiceHand implements Iterable<Integer> {
 
     @Override
     public Iterator<Integer> iterator() {
-        return IntStream.of(dice).boxed().iterator();
+        return stream().iterator();
+    }
+
+    private Stream<Integer> stream() {
+        return IntStream.of(dice).boxed();
     }
 }
