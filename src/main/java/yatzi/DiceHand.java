@@ -17,7 +17,7 @@ public class DiceHand implements Iterable<Integer> {
         return stream().iterator();
     }
 
-    private Stream<Integer> stream() {
+    Stream<Integer> stream() {
         return IntStream.of(dice).boxed();
     }
 }
