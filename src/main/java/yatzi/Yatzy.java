@@ -6,14 +6,17 @@ public class Yatzy {
         return d1 + d2 + d3 + d4 + d5;
     }
 
-    public static int yatzy(int... dice)
+    public static int yatzy(DiceHand dice)
     {
         int[] counts = new int[6];
-        for (int die : dice)
+        for (int die : dice) {
             counts[die-1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
+        }
+        for (int i = 0; i != 6; i++) {
+            if (counts[i] == 5) {
                 return 50;
+            }
+        }
         return 0;
     }
 
