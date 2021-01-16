@@ -6,18 +6,9 @@ public class Yatzy {
         return diceHand.stream().mapToInt(i -> i).sum();
     }
 
-    public static int yatzy(DiceHand dice)
-    {
-        int[] counts = new int[6];
-        for (int die : dice) {
-            counts[die-1]++;
-        }
-        for (int i = 0; i != 6; i++) {
-            if (counts[i] == 5) {
-                return 50;
-            }
-        }
-        return 0;
+    public static int yatzy(DiceHand dice) {
+        boolean allTheSame = dice.stream().distinct().count() == 1;
+        return allTheSame ? 50 : 0;
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {
