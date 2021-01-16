@@ -12,6 +12,12 @@ public class DiceHand implements Iterable<Integer> {
         this.dice = new int[]{d1, d2, d3, d4, d5};
     }
 
+    public Integer sumValues(int value) {
+        return stream()
+                .filter(i -> i == value)
+                .reduce(0, Integer::sum);
+    }
+
     @Override
     public Iterator<Integer> iterator() {
         return stream().iterator();

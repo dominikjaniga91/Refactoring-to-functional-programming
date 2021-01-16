@@ -12,27 +12,27 @@ public class Yatzy {
     }
 
     public static int ones(DiceHand diceHand) {
-        return sumValues(diceHand, 1);
+        return diceHand.sumValues(1);
     }
 
     public static int twos(DiceHand diceHand) {
-        return sumValues(diceHand, 2);
+        return diceHand.sumValues(2);
     }
 
     public static int threes(DiceHand diceHand) {
-        return sumValues(diceHand, 3);
+        return diceHand.sumValues(3);
     }
 
     public static int fours(DiceHand diceHand) {
-        return sumValues(diceHand, 4);
+        return diceHand.sumValues(4);
     }
 
     public static int fives(DiceHand diceHand) {
-        return sumValues(diceHand, 5);
+        return diceHand.sumValues(5);
     }
 
     public static int sixes(DiceHand diceHand) {
-        return sumValues(diceHand, 6);
+        return diceHand.sumValues(6);
     }
 
     protected int[] dice;
@@ -44,12 +44,6 @@ public class Yatzy {
         dice[2] = d3;
         dice[3] = d4;
         dice[4] = _5;
-    }
-
-    private static Integer sumValues(DiceHand diceHand, int value) {
-        return diceHand.stream()
-                .filter(i -> i == value)
-                .reduce(0, Integer::sum);
     }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
