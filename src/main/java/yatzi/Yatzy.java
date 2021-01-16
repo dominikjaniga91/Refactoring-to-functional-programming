@@ -12,9 +12,14 @@ public class Yatzy {
     }
 
     public static int ones(DiceHand diceHand) {
-        return diceHand.stream().filter(i -> i == 1).mapToInt(Integer::intValue).sum();
+        return sumValues(diceHand, 1);
     }
 
+    private static Integer sumValues(DiceHand diceHand, int value) {
+        return diceHand.stream()
+                .filter(i -> i == value)
+                .reduce(0, Integer::sum);
+    }
     public static int twos(int d1, int d2, int d3, int d4, int d5) {
         int sum = 0;
         if (d1 == 2) sum += 2;
