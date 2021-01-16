@@ -24,11 +24,7 @@ public class Yatzy {
     }
 
 
-    private static Integer sumValues(DiceHand diceHand, int value) {
-        return diceHand.stream()
-                .filter(i -> i == value)
-                .reduce(0, Integer::sum);
-    }
+
 
     protected int[] dice;
     public Yatzy(int d1, int d2, int d3, int d4, int _5)
@@ -41,16 +37,8 @@ public class Yatzy {
         dice[4] = _5;
     }
 
-    public int fours()
-    {
-        int sum;
-        sum = 0;
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
-                sum += 4;
-            }
-        }
-        return sum;
+    public static int fours(DiceHand diceHand) {
+        return sumValues(diceHand, 4);
     }
 
     public int fives()
@@ -70,6 +58,12 @@ public class Yatzy {
             if (dice[at] == 6)
                 sum = sum + 6;
         return sum;
+    }
+
+    private static Integer sumValues(DiceHand diceHand, int value) {
+        return diceHand.stream()
+                .filter(i -> i == value)
+                .reduce(0, Integer::sum);
     }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)

@@ -44,9 +44,9 @@ public class YatzyTest {
     @Test
     public void fours_test()
     {
-        assertEquals(12, new Yatzy(4,4,4,5,5).fours());
-        assertEquals(8, new Yatzy(4,4,5,5,5).fours());
-        assertEquals(4, new Yatzy(4,5,5,5,5).fours());
+        assertEquals(12, Yatzy.fours(new DiceHand(4,4,4,5,5)));
+        assertEquals(8, Yatzy.fours(new DiceHand(4,4,5,5,5)));
+        assertEquals(4, Yatzy.fours(new DiceHand(4,5,5,5,5)));
     }
 
     @Test
