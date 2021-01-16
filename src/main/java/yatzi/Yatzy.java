@@ -1,5 +1,11 @@
 package yatzi;
 
+import java.util.Map;
+import java.util.OptionalInt;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+
 public class Yatzy {
 
     public static int chance(DiceHand diceHand) {
@@ -46,18 +52,16 @@ public class Yatzy {
         dice[4] = _5;
     }
 
-    public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
-        int[] counts = new int[6];
-        counts[d1 - 1]++;
-        counts[d2 - 1]++;
-        counts[d3 - 1]++;
-        counts[d4 - 1]++;
-        counts[d5 - 1]++;
-        int at;
-        for (at = 0; at != 6; at++)
-            if (counts[6 - at - 1] >= 2)
-                return (6 - at) * 2;
-        return 0;
+    public static int score_pair(DiceHand diceHand) {
+
+        Map<Integer, Long> collect = diceHand.stream()
+                .collect(groupingBy(d -> d, counting()));
+
+        OptionalInt dieMax = collect.entrySet().stream()
+                .filter(e -> e.getValue() >= 2)
+                .mapToInt(Map.Entry::getKey).max();
+
+        return dieMax.orElse(0) * 2;
     }
 
     public static int two_pair(int d1, int d2, int d3, int d4, int d5) {
