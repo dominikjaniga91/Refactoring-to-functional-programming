@@ -1,8 +1,13 @@
 package yatzi;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 public class DiceHand implements Iterable<Integer> {
 
@@ -25,5 +30,9 @@ public class DiceHand implements Iterable<Integer> {
 
     Stream<Integer> stream() {
         return IntStream.of(dice).boxed();
+    }
+
+    public Map<Integer, Long> getFrequencyMap() {
+        return stream().collect(groupingBy(identity(), counting()));
     }
 }

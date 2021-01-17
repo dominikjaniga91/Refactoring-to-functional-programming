@@ -57,8 +57,7 @@ public class Yatzy {
 
     public static int score_pair(DiceHand diceHand) {
 
-        Map<Integer, Long> collect = diceHand.stream()
-                .collect(groupingBy(d -> d, counting()));
+        Map<Integer, Long> collect = diceHand.getFrequencyMap();
 
         OptionalInt dieMax = collect.entrySet().stream()
                 .filter(e -> e.getValue() >= 2)
@@ -69,8 +68,7 @@ public class Yatzy {
 
     public static int two_pair(DiceHand diceHand) {
 
-        Map<Integer, Long> counts = diceHand.stream().
-                collect(groupingBy(identity(), counting()));
+        Map<Integer, Long> counts = diceHand.getFrequencyMap();
 
         List<Integer> twoDiceOrMore = counts.entrySet().stream()
                 .filter(e -> e.getValue() >= 2).map(Map.Entry::getKey)
@@ -84,7 +82,7 @@ public class Yatzy {
 
     public static int four_of_a_kind(DiceHand diceHand) {
 
-        Map<Integer, Long> counts = diceHand.stream().collect(groupingBy(identity(), counting()));
+        Map<Integer, Long> counts = diceHand.getFrequencyMap();
 
         int die = counts.entrySet().stream()
                 .filter(e -> e.getValue() == 4)
