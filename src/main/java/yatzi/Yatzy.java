@@ -82,18 +82,17 @@ public class Yatzy {
         return twoDiceOrMore.stream().mapToInt(Integer::intValue).sum() * 2;
     }
 
-    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5) {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[_1 - 1]++;
-        tallies[_2 - 1]++;
-        tallies[d3 - 1]++;
-        tallies[d4 - 1]++;
-        tallies[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 4)
-                return (i + 1) * 4;
-        return 0;
+    public static int four_of_a_kind(DiceHand diceHand) {
+
+        Map<Integer, Long> counts = diceHand.stream().collect(groupingBy(identity(), counting()));
+
+        int die = counts.entrySet().stream()
+                .filter(e -> e.getValue() == 4)
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(0);
+
+        return die * 4;
     }
 
     public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5) {
