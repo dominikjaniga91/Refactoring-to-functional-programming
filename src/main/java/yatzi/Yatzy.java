@@ -99,21 +99,17 @@ public class Yatzy {
     }
 
     // my refactor
-    public static int smallStraight(DiceHand diceHand) {
+    public static int smallStraight1(DiceHand diceHand) {
 
         Set<Integer> set = diceHand.stream().collect(toSet());
-        int sumOfDice = set.stream().reduce(0, Integer::sum);
-        return sumOfDice == 15 ? 15 : 0;
-    }
-
-    // my refactor
-    public static int smallStraightWithDistinct(DiceHand diceHand) {
-        int sumOfDice = diceHand.sumOfDistinctValues();
-        return sumOfDice == 15 ? 15 : 0;
+        if(Set.of(1,2,3,4,5).equals(set)) {
+            return 15;
+        }
+        return 0;
     }
 
     // Victor refactor
-    public static int smallStraightVictor(DiceHand diceHand) {
+    public static int smallStraight(DiceHand diceHand) {
 
         List<Integer> sorted = diceHand.stream().sorted().collect(toList());
         if(Arrays.asList(1,2,3,4,5).equals(sorted)) {
@@ -123,8 +119,11 @@ public class Yatzy {
     }
 
     public static int largeStraight(DiceHand diceHand) {
-        int sumOfDice = diceHand.sumOfDistinctValues();
-        return sumOfDice == 20 ? 20 : 0;
+        Set<Integer> set = diceHand.stream().collect(toSet());
+        if(Set.of(2,3,4,5,6).equals(set)) {
+            return 20;
+        }
+        return 0;
     }
 
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5) {

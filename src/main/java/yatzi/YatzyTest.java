@@ -97,6 +97,7 @@ public class YatzyTest {
         assertEquals(15, Yatzy.smallStraight(new DiceHand(2, 3, 4, 5, 1)));
         assertEquals(0, Yatzy.smallStraight(new DiceHand(1, 2, 2, 4, 5)));
         assertEquals(0, Yatzy.smallStraight(new DiceHand(2, 2, 4, 5, 2)));
+        assertEquals(0, Yatzy.smallStraight(new DiceHand(0, 2, 3, 4, 6)));
     }
 
     @Test
