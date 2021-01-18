@@ -5,10 +5,6 @@ import java.util.Map;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
-
 public class Yatzy {
 
     public static int chance(DiceHand diceHand) {
@@ -83,28 +79,23 @@ public class Yatzy {
     public static int four_of_a_kind(DiceHand diceHand) {
 
         Map<Integer, Long> counts = diceHand.getFrequencyMap();
-
-        int die = counts.entrySet().stream()
-                .filter(e -> e.getValue() == 4)
-                .map(Map.Entry::getKey)
-                .findFirst()
-                .orElse(0);
-
+        int die = getDieFrequency(counts, 4);
         return die * 4;
     }
 
-    public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5) {
-        int[] t;
-        t = new int[6];
-        t[d1 - 1]++;
-        t[d2 - 1]++;
-        t[d3 - 1]++;
-        t[d4 - 1]++;
-        t[d5 - 1]++;
-        for (int i = 0; i < 6; i++)
-            if (t[i] >= 3)
-                return (i + 1) * 3;
-        return 0;
+    public static int three_of_a_kind(DiceHand diceHand) {
+
+        Map<Integer, Long> counts = diceHand.getFrequencyMap();
+        int die = getDieFrequency(counts, 3);
+        return die * 3;
+    }
+
+    private static Integer getDieFrequency(Map<Integer, Long> counts, int frequency) {
+        return counts.entrySet().stream()
+                .filter(e -> e.getValue() >= frequency)
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(0);
     }
 
     public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
