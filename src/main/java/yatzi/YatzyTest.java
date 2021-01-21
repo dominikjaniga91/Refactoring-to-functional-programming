@@ -129,4 +129,27 @@ public class YatzyTest {
                 {8  ,new DiceHand(2, 2, 2, 1, 1)},
         };
     }
+
+    @Test(dataProvider = "noFullHouseDice")
+    public void shouldReturnZero_whenThereIsNoFullHouse(DiceHand diceHand) {
+        //given
+        int expected = 0;
+
+        //when
+        int actual = Yatzy.fullHouse(diceHand);
+
+        //then
+        Assert.assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[] noFullHouseDice() {
+        return new Object[]{
+                new DiceHand(6, 1, 2, 2, 6),
+                new DiceHand(3, 3, 3, 3, 3),
+                new DiceHand(1, 1, 4, 4, 3),
+                new DiceHand(2, 2, 5, 1, 1),
+                new DiceHand(1, 2, 3, 4, 5),
+        };
+    }
 }
