@@ -1,6 +1,7 @@
 package yatzi;
 
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -110,11 +111,22 @@ public class YatzyTest {
         assertEquals(0, Yatzy.largeStraight(new DiceHand(1, 2, 2, 4, 5)));
     }
 
-    @Test
-    public void fullHouse() {
-        assertEquals(18, Yatzy.fullHouse(new DiceHand(6, 2, 2, 2, 6)));
-        assertEquals(0, Yatzy.fullHouse(new DiceHand(2, 3, 4, 5, 6)));
-        assertEquals(0, Yatzy.fullHouse(new DiceHand(2, 2, 3, 3, 6)));
-        assertEquals(0, Yatzy.fullHouse(new DiceHand(2, 2, 2, 2, 2)));
+    @Test(dataProvider = "fullHouseDice")
+    public void shouldReturnSumOfDice_whenThereIsFullHouse(int expected, DiceHand diceHand) {
+        //when
+        int actual = Yatzy.fullHouse(diceHand);
+
+        //then
+        Assert.assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[][] fullHouseDice() {
+        return new Object[][]{
+                {18 ,new DiceHand(6, 2, 2, 2, 6)},
+                {19 ,new DiceHand(3, 3, 3, 5, 5)},
+                {14 ,new DiceHand(1, 1, 4, 4, 4)},
+                {8  ,new DiceHand(2, 2, 2, 1, 1)},
+        };
     }
 }
