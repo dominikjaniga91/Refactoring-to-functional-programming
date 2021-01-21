@@ -104,12 +104,29 @@ public class YatzyTest {
         assertEquals(0, Yatzy.smallStraight(new DiceHand(0, 2, 3, 4, 6)));
     }
 
-    @Test
-    public void largeStraight() {
-        assertEquals(20, Yatzy.largeStraight(new DiceHand(6, 2, 3, 4, 5)));
-        assertEquals(20, Yatzy.largeStraight(new DiceHand(2, 3, 4, 5, 6)));
-        assertEquals(0, Yatzy.largeStraight(new DiceHand(1, 2, 2, 4, 5)));
+    @Test(dataProvider = "largeStraightDice")
+    public void largeStraight(DiceHand diceHand) {
+        //when
+        int expected = 20;
+
+        //given
+        int actual = Yatzy.largeStraight(diceHand);
+
+        //then
+        assertEquals(actual, expected);
     }
+
+    @DataProvider
+    private Object[] largeStraightDice() {
+        return new Object[]{
+                new DiceHand(6, 2, 3, 4, 5),
+                new DiceHand(6, 3, 2, 5, 4),
+                new DiceHand(2, 4, 6, 3, 5),
+                new DiceHand(5, 4, 6, 3, 2),
+                new DiceHand(3, 2, 6, 5, 4),
+        };
+    }
+
 
     @Test(dataProvider = "fullHouseDice")
     public void shouldReturnSumOfDice_whenThereIsFullHouse(int expected, DiceHand diceHand) {
