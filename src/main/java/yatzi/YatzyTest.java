@@ -1,6 +1,9 @@
 package yatzi;
 
-import org.junit.*;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 import static org.junit.Assert.*;
 
 public class YatzyTest {
