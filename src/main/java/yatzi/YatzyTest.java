@@ -127,6 +127,29 @@ public class YatzyTest {
         };
     }
 
+    @Test(dataProvider = "noLargeStraightDice")
+    public void shouldReturnZero_whenThereIsNoLargeStraight(DiceHand diceHand) {
+        //when
+        int expected = 0;
+
+        //given
+        int actual = Yatzy.largeStraight(diceHand);
+
+        //then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[] noLargeStraightDice() {
+        return new Object[]{
+                new DiceHand(6, 1, 3, 4, 5),
+                new DiceHand(4, 4, 4, 4, 4),
+                new DiceHand(2, 4, 6, 3, 3),
+                new DiceHand(5, 4, 6, 3, 6),
+                new DiceHand(3, 2, 6, 5, 1),
+        };
+    }
+
 
     @Test(dataProvider = "fullHouseDice")
     public void shouldReturnSumOfDice_whenThereIsFullHouse(int expected, DiceHand diceHand) {
