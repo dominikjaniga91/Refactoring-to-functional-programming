@@ -22,6 +22,10 @@ public class DiceHand implements Iterable<Integer> {
                 .reduce(0, Integer::sum);
     }
 
+    public int sumValues() {
+        return stream().reduce(0, Integer::sum);
+    }
+
     public int sumOfDistinctValues() {
         return stream().distinct().reduce(0, Integer::sum);
     }
