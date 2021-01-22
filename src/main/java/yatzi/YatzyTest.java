@@ -95,13 +95,29 @@ public class YatzyTest {
         assertEquals(20, Yatzy.four_of_a_kind(new DiceHand(5, 5, 5, 4, 5)));
     }
 
-    @Test
-    public void smallStraight() {
-        assertEquals(15, Yatzy.smallStraight(new DiceHand(1, 2, 3, 4, 5)));
-        assertEquals(15, Yatzy.smallStraight(new DiceHand(2, 3, 4, 5, 1)));
-        assertEquals(0, Yatzy.smallStraight(new DiceHand(1, 2, 2, 4, 5)));
-        assertEquals(0, Yatzy.smallStraight(new DiceHand(2, 2, 4, 5, 2)));
-        assertEquals(0, Yatzy.smallStraight(new DiceHand(0, 2, 3, 4, 6)));
+    @Test(dataProvider = "smallStraightDice")
+    public void shouldReturn15_whenPlayerThrowSmallStraight(DiceHand diceHand) {
+        //given
+        int expected = 15;
+
+        //when
+
+        int actual = Yatzy.smallStraight(diceHand);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+
+    @DataProvider
+    private Object[] smallStraightDice() {
+        return new Object[]{
+                new DiceHand(1, 2, 3, 4, 5),
+                new DiceHand(2, 3, 4, 5, 1),
+                new DiceHand(2, 4, 1, 3, 5),
+                new DiceHand(4, 5, 2, 1, 3),
+                new DiceHand(2, 3, 1, 5, 4),
+        };
     }
 
     @Test(dataProvider = "largeStraightDice")
