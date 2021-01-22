@@ -74,10 +74,25 @@ public class YatzyTest {
         assertEquals(12, Yatzy.score_pair(new DiceHand(5, 3, 6, 6, 5)));
     }
 
-    @Test
-    public void two_Pair() {
-        assertEquals(16, Yatzy.two_pair(new DiceHand(3, 3, 5, 4, 5)));
-        assertEquals(16, Yatzy.two_pair(new DiceHand(3, 3, 5, 5, 5)));
+    @Test(dataProvider = "twoPairDice")
+    public void shouldReturnSumOfPairs_whenPlayerThrowTwoPair(int expected, DiceHand diceHand) {
+        //when
+        int actual = Yatzy.two_pair(diceHand);
+
+        //then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[][] twoPairDice() {
+        return new Object[][] {
+                {14, new DiceHand(3, 3, 4, 4, 5)},
+                {8 , new DiceHand(1, 1, 2, 3, 3)},
+                {16, new DiceHand(3, 3, 3, 5, 5)},
+                {10, new DiceHand(3, 3, 2, 2, 1)},
+                {6 , new DiceHand(2, 1, 1, 2, 2)},
+                {10, new DiceHand(3, 1, 1, 4, 4)},
+        };
     }
 
     @Test(dataProvider = "threeOfAKindDice")
