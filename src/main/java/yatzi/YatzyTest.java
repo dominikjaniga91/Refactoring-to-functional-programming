@@ -95,6 +95,30 @@ public class YatzyTest {
         };
     }
 
+    @Test(dataProvider = "noTwoPairDice")
+    public void shouldReturnZero_whenPlayerDontThrowTwoPair(DiceHand diceHand) {
+        //given
+        int expected = 0;
+
+        //when
+        int actual = Yatzy.two_pair(diceHand);
+
+        //then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[] noTwoPairDice() {
+        return new Object[] {
+                 new DiceHand(3, 3, 4, 1, 5),
+                 new DiceHand(1, 1, 2, 1, 3),
+                 new DiceHand(3, 3, 3, 3, 5),
+                 new DiceHand(3, 3, 2, 3, 1),
+                 new DiceHand(2, 1, 5, 4, 2),
+                 new DiceHand(3, 1, 2, 4, 4),
+        };
+    }
+
     @Test(dataProvider = "threeOfAKindDice")
     public void three_of_a_kind(int expected, DiceHand diceHand) {
         //when
