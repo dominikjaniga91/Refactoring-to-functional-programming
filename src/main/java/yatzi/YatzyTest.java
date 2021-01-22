@@ -89,10 +89,27 @@ public class YatzyTest {
         assertEquals(9, Yatzy.three_of_a_kind(new DiceHand(3, 3, 3, 3, 3)));
     }
 
-    @Test
-    public void four_of_a_knd() {
-        assertEquals(12, Yatzy.four_of_a_kind(new DiceHand(3, 3, 3, 3, 5)));
-        assertEquals(20, Yatzy.four_of_a_kind(new DiceHand(5, 5, 5, 4, 5)));
+    @Test(dataProvider = "fourOfAKindDice")
+    public void shouldReturnSumOfDice_whenPlayerThrowFourOfAKind(int expected, DiceHand diceHand) {
+
+        //when
+        int actual = Yatzy.four_of_a_kind(diceHand);
+
+        //them
+        assertEquals(actual, expected);
+    }
+
+
+    @DataProvider
+    private Object[][] fourOfAKindDice() {
+        return new Object[][]{
+                {16 ,new DiceHand(1, 4, 4, 4, 4)},
+                {4 ,new DiceHand(1, 2, 1, 1, 1)},
+                {8 ,new DiceHand(2, 2, 2, 2, 5)},
+                {12 ,new DiceHand(3, 3, 2, 3, 3)},
+                {20 ,new DiceHand(5, 3, 5, 5, 5)},
+                {24 ,new DiceHand(6, 6, 6, 5, 6)},
+        };
     }
 
     @Test(dataProvider = "smallStraightDice")
