@@ -118,7 +118,6 @@ public class YatzyTest {
         int expected = 15;
 
         //when
-
         int actual = Yatzy.smallStraight(diceHand);
 
         //then
@@ -134,6 +133,30 @@ public class YatzyTest {
                 new DiceHand(2, 4, 1, 3, 5),
                 new DiceHand(4, 5, 2, 1, 3),
                 new DiceHand(2, 3, 1, 5, 4),
+        };
+    }
+
+    @Test(dataProvider = "noSmallStraightDice")
+    public void shouldReturnZero_whenPlayerDoNotThrowSmallStraight(DiceHand diceHand) {
+        //given
+        int expected = 0;
+
+        //when
+        int actual = Yatzy.smallStraight(diceHand);
+
+        //then
+        assertEquals(expected, actual);
+    }
+
+
+    @DataProvider
+    private Object[] noSmallStraightDice() {
+        return new Object[]{
+                new DiceHand(1, 2, 3, 1, 5),
+                new DiceHand(2, 3, 2, 5, 1),
+                new DiceHand(2, 4, 1, 1, 5),
+                new DiceHand(2, 3, 4, 5, 6),
+                new DiceHand(2, 3, 1, 2, 2),
         };
     }
 
