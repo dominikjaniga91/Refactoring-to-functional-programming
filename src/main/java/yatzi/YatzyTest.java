@@ -67,6 +67,7 @@ public class YatzyTest {
         assertEquals(18, Yatzy.sixes(new DiceHand(6,5,6,6,5)));
     }
 
+
     @Test(dataProvider = "onePairDice")
     public void shouldReturnSumOfPair_whenPlayerThrowOnePair(int expected, DiceHand diceHand) {
         //when
@@ -84,7 +85,24 @@ public class YatzyTest {
                 {6 , new DiceHand(3, 3, 3, 4, 1)},
                 {6 , new DiceHand(3, 3, 3, 3, 1)},
                 {10, new DiceHand(2, 2, 3, 5, 5)},
+                {4 , new DiceHand(2, 2, 2, 1, 1)},
+        };
+    }
 
+    @Test(dataProvider = "noOnePairDice")
+    public void shouldReturnZero_whenPlayerDontThrowPair(DiceHand diceHand) {
+        //when
+        int actual = Yatzy.score_pair(diceHand);
+
+        //then
+        Assert.assertEquals(actual, 0);
+    }
+
+    @DataProvider
+    private Object[] noOnePairDice() {
+        return new Object[]{
+                new DiceHand(1, 2, 3, 4, 5),
+                new DiceHand(5, 4, 3, 2, 1),
         };
     }
 
