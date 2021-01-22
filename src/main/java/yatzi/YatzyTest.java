@@ -60,11 +60,22 @@ public class YatzyTest {
         assertEquals(20, Yatzy.fives(new DiceHand(4,5,5,5,5)));
     }
 
-    @Test
-    public void sixes_test() {
-        assertEquals(0, Yatzy.sixes(new DiceHand(4,4,4,5,5)));
-        assertEquals(6, Yatzy.sixes(new DiceHand(4,4,6,5,5)));
-        assertEquals(18, Yatzy.sixes(new DiceHand(6,5,6,6,5)));
+    @Test(dataProvider = "sixesDice")
+    public void shouldReturnSumOfSixes(int expected, DiceHand diceHand) {
+        //when
+        int actual = Yatzy.sixes(diceHand);
+
+        // then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[][] sixesDice() {
+        return new Object[][] {
+                {6 , new DiceHand(1, 4, 2, 5, 6)},
+                {12, new DiceHand(4, 3, 6, 3, 6)},
+                {18, new DiceHand(6, 3, 4, 6, 6)},
+        };
     }
 
 
