@@ -51,7 +51,7 @@ public class Yatzy {
         dice[4] = _5;
     }
 
-    public static int score_pair(DiceHand diceHand) {
+    public static int scorePair(DiceHand diceHand) {
 
         Map<Integer, Long> collect = diceHand.getFrequencyMap();
 
@@ -62,7 +62,7 @@ public class Yatzy {
         return dieMax.orElse(0) * 2;
     }
 
-    public static int two_pair(DiceHand diceHand) {
+    public static int twoPair(DiceHand diceHand) {
 
         Map<Integer, Long> counts = diceHand.getFrequencyMap();
 
@@ -76,14 +76,14 @@ public class Yatzy {
         return twoDiceOrMore.stream().mapToInt(Integer::intValue).sum() * 2;
     }
 
-    public static int four_of_a_kind(DiceHand diceHand) {
+    public static int fourOfAKind(DiceHand diceHand) {
 
         Map<Integer, Long> counts = diceHand.getFrequencyMap();
         int die = getDieFrequency(counts, 4);
         return die * 4;
     }
 
-    public static int three_of_a_kind(DiceHand diceHand) {
+    public static int threeOfAKind(DiceHand diceHand) {
 
         Map<Integer, Long> counts = diceHand.getFrequencyMap();
         int die = getDieFrequency(counts, 3);

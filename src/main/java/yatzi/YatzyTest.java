@@ -71,7 +71,7 @@ public class YatzyTest {
     @Test(dataProvider = "onePairDice")
     public void shouldReturnSumOfPair_whenPlayerThrowOnePair(int expected, DiceHand diceHand) {
         //when
-        int actual = Yatzy.score_pair(diceHand);
+        int actual = Yatzy.scorePair(diceHand);
 
         //then
         assertEquals(actual, expected);
@@ -92,7 +92,7 @@ public class YatzyTest {
     @Test(dataProvider = "noOnePairDice")
     public void shouldReturnZero_whenPlayerDontThrowPair(DiceHand diceHand) {
         //when
-        int actual = Yatzy.score_pair(diceHand);
+        int actual = Yatzy.scorePair(diceHand);
 
         //then
         Assert.assertEquals(actual, 0);
@@ -109,7 +109,7 @@ public class YatzyTest {
     @Test(dataProvider = "twoPairDice")
     public void shouldReturnSumOfPairs_whenPlayerThrowTwoPair(int expected, DiceHand diceHand) {
         //when
-        int actual = Yatzy.two_pair(diceHand);
+        int actual = Yatzy.twoPair(diceHand);
 
         //then
         assertEquals(actual, expected);
@@ -133,7 +133,7 @@ public class YatzyTest {
         int expected = 0;
 
         //when
-        int actual = Yatzy.two_pair(diceHand);
+        int actual = Yatzy.twoPair(diceHand);
 
         //then
         assertEquals(actual, expected);
@@ -154,7 +154,7 @@ public class YatzyTest {
     @Test(dataProvider = "threeOfAKindDice")
     public void three_of_a_kind(int expected, DiceHand diceHand) {
         //when
-        int actual = Yatzy.three_of_a_kind(diceHand);
+        int actual = Yatzy.threeOfAKind(diceHand);
 
         //then
         assertEquals(actual, expected);
@@ -178,7 +178,7 @@ public class YatzyTest {
     public void shouldReturnSumOfDice_whenPlayerThrowFourOfAKind(int expected, DiceHand diceHand) {
 
         //when
-        int actual = Yatzy.four_of_a_kind(diceHand);
+        int actual = Yatzy.fourOfAKind(diceHand);
 
         //them
         assertEquals(actual, expected);
