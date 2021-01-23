@@ -19,7 +19,7 @@ public class YatzyTest {
     }
 
     @Test(dataProvider = "yatzyDice")
-    public void shouldReturnSumOfPair_whenPlayerThrowYatzy(DiceHand diceHand) {
+    public void shouldReturn50_whenPlayerThrowYatzy(DiceHand diceHand) {
         //given
         int expected = 50;
 
@@ -39,6 +39,30 @@ public class YatzyTest {
                 new DiceHand(4, 4, 4, 4, 4),
                 new DiceHand(5, 5, 5, 5, 5),
                 new DiceHand(6, 6, 6, 6, 6),
+        };
+    }
+
+    @Test(dataProvider = "noYatzyDice")
+    public void shouldReturnZero_whenPlayerDontThrowYatzy(DiceHand diceHand) {
+        //given
+        int expected = 0;
+
+        //when
+        int actual = Yatzy.yatzy(diceHand);
+
+        //then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[] noYatzyDice() {
+        return new Object[] {
+                new DiceHand(1, 2, 1, 1, 1),
+                new DiceHand(2, 2, 3, 2, 2),
+                new DiceHand(3, 3, 4, 3, 3),
+                new DiceHand(4, 5, 4, 4, 4),
+                new DiceHand(5, 5, 6, 5, 5),
+                new DiceHand(6, 6, 6, 1, 6),
         };
     }
 
