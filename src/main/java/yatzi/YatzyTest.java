@@ -33,16 +33,40 @@ public class YatzyTest {
         assertEquals(4, Yatzy.ones(new DiceHand(1, 2, 1, 1, 1)));
     }
 
-    @Test
-    public void test_2s() {
-        assertEquals(4, Yatzy.twos(new DiceHand(1, 2, 3, 2, 6)));
-        assertEquals(10, Yatzy.twos(new DiceHand(2, 2, 2, 2, 2)));
+    @Test(dataProvider = "twosDice")
+    public void shouldReturnSumOfTwos(int expected, DiceHand diceHand) {
+        //when
+        int actual = Yatzy.twos(diceHand);
+
+        //then
+        assertEquals(actual, expected);
     }
 
-    @Test
-    public void test_threes() {
-        assertEquals(6, Yatzy.threes(new DiceHand(1, 2, 3, 2, 3)));
-        assertEquals(12, Yatzy.threes(new DiceHand(2, 3, 3, 3, 3)));
+    @DataProvider
+    private Object[][] twosDice() {
+        return new Object[][] {
+                {4 ,new DiceHand(1, 2, 3, 2, 6)},
+                {10,new DiceHand(2, 2, 2, 2, 2)},
+                {6 ,new DiceHand(2, 2, 1, 2, 3)},
+        };
+    }
+
+    @Test(dataProvider = "threesDice")
+    public void shouldReturnSumOfThrees(int expected, DiceHand diceHand) {
+        //when
+        int actual = Yatzy.threes(diceHand);
+
+        //then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[][] threesDice() {
+        return new Object[][] {
+                {6 ,new DiceHand(1, 2, 3, 2, 3)},
+                {12 ,new DiceHand(2, 3, 3, 3, 3)},
+                {9 ,new DiceHand(2, 3, 1, 3, 3)},
+        };
     }
 
     @Test(dataProvider = "foursDice")
