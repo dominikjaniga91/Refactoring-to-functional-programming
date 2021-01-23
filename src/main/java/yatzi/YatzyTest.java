@@ -9,13 +9,26 @@ import static org.junit.Assert.*;
 
 public class YatzyTest {
 
-    @Test
-    public void chance_scores_sum_of_all_dice() {
-        int expected = 15;
-        int actual = Yatzy.chance(new DiceHand(2,3,4,5,1));
+    @Test(dataProvider = "chanceDice")
+    public void shouldReturnSumOfDice_whenPlayerThrowChance(int expected, DiceHand diceHand) {
+        //when
+        int actual = Yatzy.chance(diceHand);
 
-        assertEquals(expected, actual);
-        assertEquals(16, Yatzy.chance(new DiceHand(3, 3, 4, 5, 1)));
+
+        //then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[][] chanceDice() {
+        return new Object[][] {
+                {8 ,new DiceHand(1, 2, 1, 3, 1)},
+                {15,new DiceHand(5, 4, 3, 2, 1)},
+                {14,new DiceHand(1, 3, 3, 2, 5)},
+                {18,new DiceHand(1, 2, 3, 6, 6)},
+                {14,new DiceHand(2, 3, 1, 4, 4)},
+                {21,new DiceHand(6, 1, 6, 2, 6)},
+        };
     }
 
     @Test(dataProvider = "yatzyDice")
@@ -44,7 +57,7 @@ public class YatzyTest {
 
     @Test(dataProvider = "noYatzyDice")
     public void shouldReturnZero_whenPlayerDontThrowYatzy(DiceHand diceHand) {
-        //given
+        //give
         int expected = 0;
 
         //when
