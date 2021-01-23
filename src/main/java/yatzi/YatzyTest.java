@@ -18,19 +18,47 @@ public class YatzyTest {
         assertEquals(16, Yatzy.chance(new DiceHand(3, 3, 4, 5, 1)));
     }
 
-    @Test public void yatzy_scores_50() {
+    @Test(dataProvider = "yatzyDice")
+    public void shouldReturnSumOfPair_whenPlayerThrowYatzy(DiceHand diceHand) {
+        //given
         int expected = 50;
-        int actual = Yatzy.yatzy(new DiceHand(4,4,4,4,4));
-        assertEquals(expected, actual);
-        assertEquals(50, Yatzy.yatzy(new DiceHand(6,6,6,6,6)));
-        assertEquals(0, Yatzy.yatzy(new DiceHand(6,6,6,6,3)));
+
+        //when
+        int actual = Yatzy.yatzy(diceHand);
+
+        //then
+        assertEquals(actual, expected);
     }
 
-    @Test public void test_1s() {
-        assertTrue(Yatzy.ones(new DiceHand(1, 2, 3, 4, 5)) == 1);
-        assertEquals(2, Yatzy.ones(new DiceHand(1, 2, 1, 4, 5)));
-        assertEquals(0, Yatzy.ones(new DiceHand(6, 2, 2, 4, 5)));
-        assertEquals(4, Yatzy.ones(new DiceHand(1, 2, 1, 1, 1)));
+    @DataProvider
+    private Object[] yatzyDice() {
+        return new Object[] {
+                new DiceHand(1, 1, 1, 1, 1),
+                new DiceHand(2, 2, 2, 2, 2),
+                new DiceHand(3, 3, 3, 3, 3),
+                new DiceHand(4, 4, 4, 4, 4),
+                new DiceHand(5, 5, 5, 5, 5),
+                new DiceHand(6, 6, 6, 6, 6),
+        };
+    }
+
+    @Test(dataProvider = "onesDice")
+    public void shouldReturnSumOfOnes(int expected, DiceHand diceHand) {
+        //when
+        int actual = Yatzy.ones(diceHand);
+
+        //then
+        assertEquals(actual, expected);
+    }
+
+    @DataProvider
+    private Object[][] onesDice() {
+        return new Object[][] {
+                {1 ,new DiceHand(1, 2, 3, 4, 5)},
+                {2 ,new DiceHand(1, 2, 1, 4, 5)},
+                {0 ,new DiceHand(6, 2, 2, 4, 5)},
+                {4 ,new DiceHand(1, 2, 1, 1, 1)},
+        };
     }
 
     @Test(dataProvider = "twosDice")
